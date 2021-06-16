@@ -11,10 +11,13 @@ module.exports = {
     public: "/",
     src: "/dist",
   },
-  routes: [{ match: "routes", src: ".*", dest: "/index.html" }],
   optimize: {
     bundle: true,
   },
+  routes: [
+    { match: "routes", src: "robots.txt", dest: "/robots.txt" },
+    { match: "routes", src: ".*", dest: "/index.html" },
+  ],
   devOptions: {
     open: "none",
   },

@@ -1,17 +1,24 @@
-# \<Project name\>
+# Publite Frontend
 
 <p align="center">
-  <img src="https://github.com/dm1sh/<Repo name>/raw/main/logo.svg" alt="<Logo description>" width="150px">
+  <img src="https://github.com/publite/frontend/raw/main/logo.svg" alt="Publite logo" width="150px">
 </p>
 
 ## Overview
 
-\<Example text\>
+Frontend for Publite service — E-Books reader
 
 ## Deploy
 
-\<Deployment instruction\>
+Dev environment setup:
 
 ```bash
-<Code>
+npm i
+
+# Run with watch
+npm run dev
+
+# Build to test prod
+npm run build
+npm exec serve -s build
 ```

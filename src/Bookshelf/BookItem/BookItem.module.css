@@ -1,6 +1,6 @@
 .bookCard {
   width: 300px;
-  border: 1px lightgray solid;
+  border: 1px lightgrey solid;
   overflow: hidden;
   display: flex;
   justify-content: stretch;
@@ -19,7 +19,6 @@
   height: auto;
   justify-content: center;
   padding: 10px;
-  transition: height 0.3s;
 }
 
 .cardHeading > * {
@@ -28,7 +27,7 @@
 
 .imageContainer {
   max-height: 0%;
-  transition: max-height 0.3s;
+  transition: max-height 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
   overflow: hidden;
   display: flex;
 }

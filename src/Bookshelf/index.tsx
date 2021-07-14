@@ -5,6 +5,7 @@ import styles from "./Bookshelf.module.css";
 
 import list from "../assets/bookList.json";
 import { BookItem } from "./BookItem";
+import { AddBook } from "./AddBook";
 
 export const Bookshelf = () => {
   const [books, setBooks] = useState<IBook[]>(list);
@@ -12,6 +13,7 @@ export const Bookshelf = () => {
   return (
     <div className={styles.container}>
       <div className={styles.scrollContainer}>
+        <AddBook />
         {books.map((book, index) => (
           <BookItem key={book.hash} {...book} />
         ))}

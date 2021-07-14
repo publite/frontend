@@ -1,0 +1,19 @@
+.container {
+  padding: 15vh;
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.scrollContainer {
+  display: flex;
+  gap: 30px;
+  height: 100%;
+  display: inline-flex;
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    padding: 15vh 30px;
+  }
+}

@@ -1,9 +1,11 @@
 import React from "react";
+import Bookshelf from "../Bookshelf";
 import styles from "./App.module.css";
 
 export const App = () => (
-  <div className={styles.centredBlock}>
-    <p>Hello, Publite</p>
-    <img src="/logo.svg" alt="Publite logo" width="100px" />
+  <div className={styles.container}>
+    <Bookshelf />
   </div>
 );
+
+export default App;

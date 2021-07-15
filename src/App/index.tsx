@@ -13,12 +13,10 @@ const routes: Route[] = [
   { Component: UploadForm, path: "/upload" },
 ];
 
-export const App = () => {
-  return (
-    <div className={styles.container}>
-      <Router routes={routes} startPath="/list" DefaultComponent={Err404} />
-    </div>
-  );
-};
+export const App = () => (
+  <div className={styles.container}>
+    <Router routes={routes} startPath="/list" DefaultComponent={Err404} />
+  </div>
+);
 
 export default App;

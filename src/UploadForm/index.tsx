@@ -4,6 +4,8 @@ import plusIcon from "@assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "../api";
 import { saveBook } from "@utils/localStorage";
+import { BASE_URL } from "../constants";
+import { goTo } from "../router/goTo";
 
 export const UploadForm = () => {
   const [error, setError] = useState("");
@@ -22,7 +24,7 @@ export const UploadForm = () => {
 
         if (validateResponse(res)) {
           saveBook(res, res.hash || Date.now().toString());
-          // TODO: redirect to main menu
+          goTo(BASE_URL + "/list");
         }
       }
     } catch (err) {

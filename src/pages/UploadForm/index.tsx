@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { useLocation } from "wouter";
 
 import plusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "~/api";
 import { saveBook } from "~/utils/localStorage";
-import { BASE_URL } from "~/constants";
-import { goTo } from "~/router/goTo";
 
 export const UploadForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [_, setLocation] = useLocation();
 
   const processFile = async (file: File | undefined) => {
     try {
@@ -24,7 +24,7 @@ export const UploadForm = () => {
 
         if (validateResponse(res)) {
           saveBook(res, res.hash || Date.now().toString());
-          goTo(BASE_URL + "/list");
+          setLocation("/");
         }
       }
     } catch (err) {

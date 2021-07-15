@@ -1,0 +1,55 @@
+.container {
+  margin: 15vh;
+  border: 2px dashed black;
+  height: 70vh;
+}
+
+.container:hover {
+  border-style: solid;
+}
+
+.label {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2vh;
+  font-size: 1.5rem;
+}
+
+.plus {
+  width: 15vh;
+  margin-right: 5vh;
+}
+
+.error {
+  color: red;
+}
+
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    margin: 15vw;
+    height: calc(100vh - 30vw);
+  }
+
+  .label {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .plus {
+    margin-right: 0;
+    margin-bottom: 5vh;
+  }
+}

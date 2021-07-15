@@ -1,4 +1,6 @@
 .bookCard {
+  text-decoration: none;
+  color: black;
   width: 300px;
   border: 1px lightgrey solid;
   overflow: hidden;

@@ -1,10 +1,11 @@
-import { Route } from "@type/router";
+import { Route } from "~/types/router";
 import React from "react";
 
-import { Bookshelf } from "../Bookshelf";
-import { Router } from "../router";
-import { Err404 } from "../router/404";
-import { UploadForm } from "../UploadForm";
+import { Bookshelf } from "~/pages/Bookshelf";
+import { UploadForm } from "~/pages/UploadForm";
+
+import { Router } from "~/router";
+import { Err404 } from "~/router/404";
 
 import styles from "./App.module.css";
 

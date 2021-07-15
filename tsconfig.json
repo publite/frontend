@@ -11,9 +11,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@type/*": ["./src/type/*"]
+      "~/*": ["./src/*"]
     }
   }
 }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-import plusIcon from "@assets/plus.svg";
+import plusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
-import { submitFile, validateResponse, validState } from "../api";
-import { saveBook } from "@utils/localStorage";
-import { BASE_URL } from "../constants";
-import { goTo } from "../router/goTo";
+import { submitFile, validateResponse, validState } from "~/api";
+import { saveBook } from "~/utils/localStorage";
+import { BASE_URL } from "~/constants";
+import { goTo } from "~/router/goTo";
 
 export const UploadForm = () => {
   const [error, setError] = useState("");

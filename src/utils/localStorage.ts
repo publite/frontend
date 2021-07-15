@@ -1,7 +1,7 @@
-import { IBook } from "@type/book";
-import { isArrOfStr } from "@type/utils";
-import { validateResponse } from "../api";
-import { BookItem } from "../Bookshelf/BookItem";
+import { IBook } from "~/types/book";
+import { isArrOfStr } from "~/types/utils";
+import { validateResponse } from "~/api";
+import { BookItem } from "~/pages/Bookshelf/BookItem";
 
 const readBookList = <T>(
   cb: (bookList: string[]) => T,

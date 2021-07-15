@@ -22,12 +22,7 @@ module.exports = {
     open: "none",
   },
   alias: {
-    "@assets": "./src/assets",
-    "@utils": "./src/utils",
-    "@type": "./src/type",
+    "~": "./src",
   },
   exclude: ["**/node_modules/**/*", "**/*.test.*"],
-  env: {
-    // API_URL: "https://publitebackend.dmitriy.icu",
-  },
 };

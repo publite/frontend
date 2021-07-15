@@ -1,4 +1,4 @@
-import { IBook, optionalBookProps, requiredBookProps } from "@type/book";
+import { IBook, optionalBookProps, requiredBookProps } from "~/types/book";
 
 import { API_URL } from "./constants";
 

@@ -1,9 +1,9 @@
 import React from "react";
 
-import plusIcon from "@assets/plus.svg";
+import plusIcon from "~/assets/plus.svg";
 import styles from "./AddBook.module.css";
-import { BASE_URL } from "../../constants";
-import { goTo } from "../../router/goTo";
+import { BASE_URL } from "~/constants";
+import { goTo } from "~/router/goTo";
 
 export const AddBook = () => {
   return (

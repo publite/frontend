@@ -1,7 +1,7 @@
 import React from "react";
 
-import { BASE_URL } from "../constants";
-import { Route } from "@type/router";
+import { BASE_URL } from "~/constants";
+import { Route } from "~/types/router";
 import { Err404 } from "./404";
 import { goTo } from "./goTo";
 

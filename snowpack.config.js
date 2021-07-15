@@ -21,7 +21,11 @@ module.exports = {
   devOptions: {
     open: "none",
   },
-  alias: { "@assets": "./src/assets", "@utils": "./src/utils" },
+  alias: {
+    "@assets": "./src/assets",
+    "@utils": "./src/utils",
+    "@type": "./src/type",
+  },
   exclude: ["**/node_modules/**/*", "**/*.test.*"],
   env: {
     // API_URL: "https://publitebackend.dmitriy.icu",

@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./BookItem.module.css";
 
-import { IBook } from "../../types/book";
+import { IBook } from "@type/book";
 
 interface IBookItemProps extends IBook {}
 

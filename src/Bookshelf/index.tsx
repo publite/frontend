@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { IBook } from "../types/book";
+import { IBook } from "@type/book";
 
 import styles from "./Bookshelf.module.css";
 
-import list from "../assets/bookList.json";
+import list from "@assets/bookList.json";
 import { BookItem } from "./BookItem";
 import { AddBook } from "./AddBook";
 
@@ -21,5 +21,3 @@ export const Bookshelf = () => {
     </div>
   );
 };
-
-export default Bookshelf;

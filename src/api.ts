@@ -1,6 +1,6 @@
-import { IBook, optionalBookProps, requiredBookProps } from "./types/book";
+import { IBook, optionalBookProps, requiredBookProps } from "@type/book";
 
-const API_URL = import.meta.env.SNOWPACK_PUBLIC_API_URL;
+import { API_URL } from "./constants";
 
 export const validState = (file: File | undefined): file is File => {
   if (!file) throw new Error("Book file is required. Please, attach one");

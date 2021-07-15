@@ -1,5 +1,5 @@
-import { IBook } from "../types/book";
-import { isArrOfStr } from "../types/utils";
+import { IBook } from "@type/book";
+import { isArrOfStr } from "@type/utils";
 
 export const saveBook = (bookObj: IBook, key: string): void => {
   const bookListStr = localStorage.getItem("list") || "[]";

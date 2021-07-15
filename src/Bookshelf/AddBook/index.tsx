@@ -1,6 +1,6 @@
 import React from "react";
 
-import plusIcon from "./plus.svg";
+import plusIcon from "@assets/plus.svg";
 import styles from "./AddBook.module.css";
 
 export const AddBook = () => {

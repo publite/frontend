@@ -21,5 +21,9 @@ module.exports = {
   devOptions: {
     open: "none",
   },
+  alias: { "@assets": "./src/assets" },
   exclude: ["**/node_modules/**/*", "**/*.test.*"],
+  env: {
+    // API_URL: "https://publitebackend.dmitriy.icu",
+  },
 };

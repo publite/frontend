@@ -13,7 +13,7 @@ export const Bookshelf = () => {
     <div className={styles.container}>
       <div className={styles.scrollContainer}>
         <AddBook />
-        {books.map((book, index) => (
+        {Object.values(books).map((book, index) => (
           <BookItem key={book.hash} {...book} />
         ))}
       </div>

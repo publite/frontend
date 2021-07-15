@@ -3,8 +3,9 @@ import { useLibrary, UseLibraryReturnTuple } from "./hooks/useLibrary";
 import { IBook } from "./types/book";
 
 export const BookListContext = React.createContext<UseLibraryReturnTuple>([
-  [],
+  {},
   (book: IBook) => {},
+  [],
 ]);
 
 export const BookListContextProvider: React.FC = ({ children }) => {

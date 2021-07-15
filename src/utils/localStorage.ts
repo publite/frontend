@@ -1,33 +1,31 @@
 import { IBook } from "~/types/book";
 import { isArrOfStr } from "~/types/utils";
-import { validateResponse } from "~/api";
+import { validateResponse } from "~/utils/api";
 
-export const getTitleList = () => {
-  const titleListStr = localStorage.getItem("list") || "[]";
-  const titleList: unknown = JSON.parse(titleListStr);
+export const getHashList = () => {
+  const hashListStr = localStorage.getItem("list") || "[]";
+  const hashList: unknown = JSON.parse(hashListStr);
 
-  if (isArrOfStr(titleList)) return titleList;
+  if (isArrOfStr(hashList)) return hashList;
   else {
     localStorage.setItem("list", "[]");
     return [];
   }
 };
 
-export const getBookList = (titleList: string[]) =>
-  titleList
-    .map<unknown>((hash) => JSON.parse(localStorage.getItem(hash) || "{}"))
-    .filter((obj): obj is IBook => {
-      try {
-        return validateResponse(obj);
-      } catch (err) {
-        if (import.meta.env.NODE_ENV === "development")
-          console.log(err.message);
-        return false;
-      }
-    });
+export const getBookHT = (hashList: string[]) => {
+  const bookHT: Record<string, IBook> = {};
 
-export const setBook = (key: string, book: IBook) =>
+  hashList.forEach((hash) => {
+    const obj: unknown = JSON.parse(localStorage.getItem(hash) || "{}");
+    if (validateResponse(obj)) bookHT[hash] = obj;
+  });
+
+  return bookHT;
+};
+
+export const saveBook = (key: string, book: IBook) =>
   localStorage.setItem(key, JSON.stringify(book));
 
-export const updateTitleList = (titleList: string[]) =>
-  localStorage.setItem("list", JSON.stringify(titleList));
+export const updateHashList = (hashList: string[]) =>
+  localStorage.setItem("list", JSON.stringify(hashList));

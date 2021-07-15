@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 
 import plusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
-import { submitFile, validateResponse, validState } from "~/api";
+import { submitFile, validateResponse, validState } from "~/utils/api";
 import { BookListContext } from "~/context";
 
 export const UploadForm = () => {

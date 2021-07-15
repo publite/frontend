@@ -1,6 +1,6 @@
 import { IBook, requiredBookProps } from "~/types/book";
 
-import { API_URL } from "./constants";
+import { API_URL } from "~/constants";
 
 export const validState = (file: File | undefined): file is File => {
   if (!file) throw new Error("Book file is required. Please, attach one");
@@ -42,8 +42,11 @@ export const submitFile = async (
 export const validateResponse = (content: unknown): content is IBook => {
   if (content && typeof content === "object")
     for (const key of requiredBookProps)
-      if (!(key in content))
-        throw new Error(`${key} is not specified in server response`);
+      if (!(key in content)) {
+        if (import.meta.env.NODE_ENV === "development")
+          console.log(`${key} is not specified in server response`);
+        return false;
+      }
 
   return true;
 };

@@ -1,38 +1,46 @@
 import { useEffect, useState } from "react";
 import { IBook } from "~/types/book";
 import {
-  getBookList,
-  getTitleList,
-  setBook,
-  updateTitleList,
+  getBookHT,
+  getHashList,
+  saveBook,
+  updateHashList,
 } from "~/utils/localStorage";
 
 export type AddBookFT = (book: IBook) => void;
 
-export type UseLibraryReturnTuple = [IBook[], AddBookFT];
+export type UseLibraryReturnTuple = [
+  Record<string, IBook>,
+  AddBookFT,
+  string[]
+];
 
 export const useLibrary = (): UseLibraryReturnTuple => {
-  const [bookList, setBookList] = useState<IBook[]>([]);
-  const [titleList, setTitleList] = useState<string[]>([]);
+  const [library, setLibrary] = useState<Record<string, IBook>>({});
+  const [hashList, setHashList] = useState<string[]>([]);
 
   const addBook: AddBookFT = (book) => {
     const key = book.hash || Date.now().toString();
-    if (key && !titleList.includes(key)) {
-      setTitleList([key, ...titleList]);
-      setBookList([book, ...bookList]);
+    if (key && !hashList.includes(key)) {
+      setHashList([key, ...hashList]);
+      setLibrary((prev) => ({ [key]: book, ...prev }));
 
-      setBook(key, book);
+      saveBook(key, book);
     }
   };
 
   useEffect(() => {
-    const receivedTitleList = getTitleList();
+    const receivedHashList = getHashList();
 
-    setTitleList(receivedTitleList);
-    setBookList(getBookList(receivedTitleList));
+    setHashList(receivedHashList);
+    setLibrary(getBookHT(receivedHashList));
   }, []);
 
-  useEffect(() => updateTitleList(titleList), [titleList]);
+  useEffect(() => updateHashList(hashList), [hashList]);
 
-  return [bookList, addBook];
+  useEffect(() => {
+    console.log(library);
+  }, [library]);
+
+  return [library, addBook, hashList];
 };

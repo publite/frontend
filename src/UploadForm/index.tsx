@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import plusIcon from "@assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "../api";
+import { saveBook } from "@utils/localStorage";
 
 export const UploadForm = () => {
   const [error, setError] = useState("");
@@ -17,8 +18,10 @@ export const UploadForm = () => {
         const res = await submitFile(file);
         setLoading(false);
 
+        console.log(validateResponse(res));
+
         if (validateResponse(res)) {
-          // TODO: save book to localstorage
+          saveBook(res, res.hash || Date.now().toString());
           // TODO: redirect to main menu
         }
       }

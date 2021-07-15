@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation } from "wouter";
 
 import plusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "~/api";
-import { saveBook } from "~/utils/localStorage";
+import { BookListContext } from "~/context";
 
 export const UploadForm = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [_, setLocation] = useLocation();
+
+  const [__, saveBook] = useContext(BookListContext);
 
   const processFile = async (file: File | undefined) => {
     try {
@@ -23,7 +25,7 @@ export const UploadForm = () => {
         console.log(validateResponse(res));
 
         if (validateResponse(res)) {
-          saveBook(res, res.hash || Date.now().toString());
+          saveBook(res);
           setLocation("/");
         }
       }

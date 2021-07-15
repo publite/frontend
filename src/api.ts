@@ -1,4 +1,4 @@
-import { IBook, optionalBookProps, requiredBookProps } from "~/types/book";
+import { IBook, requiredBookProps } from "~/types/book";
 
 import { API_URL } from "./constants";
 
@@ -39,12 +39,11 @@ export const submitFile = async (
   }
 };
 
-export const validateResponse = (
-  content: Record<string, unknown>
-): content is IBook => {
-  for (const key of requiredBookProps)
-    if (!(key in content))
-      throw new Error(`${key} is not specified in server response`);
+export const validateResponse = (content: unknown): content is IBook => {
+  if (content && typeof content === "object")
+    for (const key of requiredBookProps)
+      if (!(key in content))
+        throw new Error(`${key} is not specified in server response`);
 
   return true;
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "wouter";
+import { BookListContextProvider } from "~/context";
 
 import { Bookshelf } from "~/pages/Bookshelf";
 import { BookView } from "~/pages/BookView";
@@ -9,11 +10,13 @@ import styles from "./App.module.css";
 
 export const App = () => (
   <div className={styles.container}>
-    <Switch>
-      <Route path="/upload" component={UploadForm} />
-      <Route path="/" component={Bookshelf} />
-      <Route path="/:hash" component={BookView} />
-    </Switch>
+    <BookListContextProvider>
+      <Switch>
+        <Route path="/upload" component={UploadForm} />
+        <Route path="/" component={Bookshelf} />
+        <Route path="/:hash" component={BookView} />
+      </Switch>
+    </BookListContextProvider>
   </div>
 );
 

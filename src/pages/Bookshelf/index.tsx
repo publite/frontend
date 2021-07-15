@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { IBook } from "~/types/book";
+import React, { useContext, useEffect, useState } from "react";
 
 import styles from "./Bookshelf.module.css";
 
 import { BookItem } from "./BookItem";
 import { AddBook } from "./AddBook";
-import { readBooks } from "~/utils/localStorage";
+import { BookListContext } from "~/context";
 
 export const Bookshelf = () => {
-  const [books, setBooks] = useState<IBook[]>([]);
-
-  useEffect(() => {
-    setBooks(readBooks());
-  }, []);
+  const [books] = useContext(BookListContext);
 
   return (
     <div className={styles.container}>

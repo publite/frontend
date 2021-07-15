@@ -1,40 +1,33 @@
 import { IBook } from "~/types/book";
 import { isArrOfStr } from "~/types/utils";
 import { validateResponse } from "~/api";
-import { BookItem } from "~/pages/Bookshelf/BookItem";
 
-const readBookList = <T>(
-  cb: (bookList: string[]) => T,
-  defaultValue: T extends void ? undefined : T
-) => {
-  const bookListStr = localStorage.getItem("list") || "[]";
-  const bookList: unknown = JSON.parse(bookListStr);
+export const getTitleList = () => {
+  const titleListStr = localStorage.getItem("list") || "[]";
+  const titleList: unknown = JSON.parse(titleListStr);
 
-  if (isArrOfStr(bookList)) return cb(bookList);
-  return defaultValue;
+  if (isArrOfStr(titleList)) return titleList;
+  else {
+    localStorage.setItem("list", "[]");
+    return [];
+  }
 };
 
-export const saveBook = (bookObj: IBook, key: string) =>
-  readBookList((bookList) => {
-    if (!bookList.includes(key)) {
-      const newBookList = [key, ...bookList];
+export const getBookList = (titleList: string[]) =>
+  titleList
+    .map<unknown>((hash) => JSON.parse(localStorage.getItem(hash) || "{}"))
+    .filter((obj): obj is IBook => {
+      try {
+        return validateResponse(obj);
+      } catch (err) {
+        if (import.meta.env.NODE_ENV === "development")
+          console.log(err.message);
+        return false;
+      }
+    });
 
-      localStorage.setItem("list", JSON.stringify(newBookList));
-      localStorage.setItem(key, JSON.stringify(bookObj));
-    }
-  }, undefined);
+export const setBook = (key: string, book: IBook) =>
+  localStorage.setItem(key, JSON.stringify(book));
 
-export const readBooks = (): IBook[] =>
-  readBookList(
-    (bookList) =>
-      bookList
-        .map((hash) => JSON.parse(localStorage.getItem(hash) || "{}"))
-        .filter((e) => {
-          try {
-            return validateResponse(e);
-          } catch (err) {
-            return false;
-          }
-        }),
-    []
-  );
+export const updateTitleList = (titleList: string[]) =>
+  localStorage.setItem("list", JSON.stringify(titleList));

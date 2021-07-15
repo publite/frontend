@@ -3,7 +3,6 @@ import { useLocation } from "wouter";
 
 import plusIcon from "~/assets/plus.svg";
 import styles from "./AddBook.module.css";
-import { BASE_URL } from "~/constants";
 
 export const AddBook = () => {
   const [_, setLocation] = useLocation();

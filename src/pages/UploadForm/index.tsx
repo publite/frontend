@@ -28,6 +28,7 @@ export const UploadForm = ({ setLoading }: IPageProps) => {
         }
       }
     } catch (err) {
+      setLoading(false);
       setError(err.message);
     }
   };

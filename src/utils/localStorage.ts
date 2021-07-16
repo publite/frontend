@@ -4,10 +4,13 @@ import { validateResponse } from "~/utils/api";
 
 export const getHashList = () => {
   const hashListStr = localStorage.getItem("list") || "[]";
-  const hashList: unknown = JSON.parse(hashListStr);
+  try {
+    const hashList: unknown = JSON.parse(hashListStr);
 
-  if (isArrOfStr(hashList)) return hashList;
-  else {
+    if (isArrOfStr(hashList)) return hashList;
+    else throw new Error("ValidationError");
+  } catch (e) {
+    console.error(e);
     localStorage.setItem("list", "[]");
     return [];
   }
@@ -17,8 +20,12 @@ export const getBookHT = (hashList: string[]) => {
   const bookHT: Record<string, IBook> = {};
 
   hashList.forEach((hash) => {
-    const obj: unknown = JSON.parse(localStorage.getItem(hash) || "{}");
-    if (validateResponse(obj)) bookHT[hash] = obj;
+    try {
+      const obj: unknown = JSON.parse(localStorage.getItem(hash) || "{}");
+      if (validateResponse(obj)) bookHT[hash] = obj;
+    } catch (e) {
+      console.error(e);
+    }
   });
 
   return bookHT;
@@ -50,11 +57,15 @@ export const loadPages = (
   const str = localStorage.getItem(hashStr(hash, height, width));
 
   if (str) {
-    const obj: unknown = JSON.parse(str);
+    try {
+      const obj: unknown = JSON.parse(str);
 
-    if (validatePages(obj)) {
-      cb(obj);
-      return true;
+      if (validatePages(obj)) {
+        cb(obj);
+        return true;
+      }
+    } catch (e) {
+      console.error(e);
     }
   }
 

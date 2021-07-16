@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
 import plusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "~/utils/api";
 import { BookListContext } from "~/context";
+import { IPageProps } from "~/types/page";
 
-export const UploadForm = () => {
+export const UploadForm = ({ setLoading }: IPageProps) => {
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
   const [_, setLocation] = useLocation();
 
   const [__, saveBook] = useContext(BookListContext);

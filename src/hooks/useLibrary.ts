@@ -10,13 +10,13 @@ import {
 export type AddBookFT = (book: IBook) => void;
 
 export type UseLibraryReturnTuple = [
-  Record<string, IBook>,
+  Record<string, IBook> | null,
   AddBookFT,
   string[]
 ];
 
 export const useLibrary = (): UseLibraryReturnTuple => {
-  const [library, setLibrary] = useState<Record<string, IBook>>({});
+  const [library, setLibrary] = useState<Record<string, IBook> | null>(null);
   const [hashList, setHashList] = useState<string[]>([]);
 
   const addBook: AddBookFT = (book) => {

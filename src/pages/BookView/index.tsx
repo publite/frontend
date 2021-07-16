@@ -5,9 +5,12 @@ import styles from "./BookView.module.css";
 
 import { BookListContext } from "~/context";
 import { usePagination } from "~/hooks/usePagination";
+import { IPageProps } from "~/types/page";
 
-export const BookView = () => {
-  const [match, params] = useRoute("/:hash");
+export const BookView = ({ setLoading, loading }: IPageProps) => {
+  useEffect(() => setLoading(true), []);
+
+  const [_, params] = useRoute("/:hash");
   const [books] = useContext(BookListContext);
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -18,7 +21,7 @@ export const BookView = () => {
     contentRef,
     pageContainerRef,
     pageRef,
-    params?.hash ? books[params.hash]?.content : undefined
+    params?.hash && books && loading ? books[params.hash]?.content : undefined
   );
 
   const currentPageRef = useRef(currentPage);
@@ -29,6 +32,8 @@ export const BookView = () => {
 
   useEffect(() => {
     if (ready) {
+      setLoading(false);
+
       const handleKey = ({ key }: KeyboardEvent) => {
         switch (key) {
           case "ArrowLeft":
@@ -44,19 +49,16 @@ export const BookView = () => {
     }
   }, [ready]);
 
-  if (params?.hash && params.hash in books)
-    return (
-      <>
-        {!ready && (
-          <div className={styles.loadingIndicator}>
-            <h1>Loading</h1>
+  if (books) {
+    if (params?.hash && params.hash in books)
+      return (
+        <>
+          <div className={styles.content} ref={contentRef} />
+          <div className={styles.pageContainer} ref={pageContainerRef}>
+            <div ref={pageRef} />
           </div>
-        )}
-        <div className={styles.content} ref={contentRef} />
-        <div className={styles.pageContainer} ref={pageContainerRef}>
-          <div ref={pageRef} />
-        </div>
-      </>
-    );
-  return <Redirect to="/" />;
+        </>
+      );
+    return <Redirect to="/" />;
+  } else return <></>;
 };

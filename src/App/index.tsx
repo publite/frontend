@@ -1,23 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "wouter";
 import { BookListContextProvider } from "~/context";
 
 import { Bookshelf } from "~/pages/Bookshelf";
 import { BookView } from "~/pages/BookView";
 import { UploadForm } from "~/pages/UploadForm";
+import { Dots } from "~/utils/Dots";
 
 import styles from "./App.module.css";
 
-export const App = () => (
-  <div className={styles.container}>
-    <BookListContextProvider>
-      <Switch>
-        <Route path="/upload" component={UploadForm} />
-        <Route path="/" component={Bookshelf} />
-        <Route path="/:hash" component={BookView} />
-      </Switch>
-    </BookListContextProvider>
-  </div>
-);
+export const App = () => {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <div className={styles.container}>
+      {loading && (
+        <div className={styles.loadingIndicator}>
+          <h1>
+            Loading
+            <Dots />
+          </h1>
+        </div>
+      )}
+      <BookListContextProvider>
+        <Switch>
+          <Route path="/upload">
+            <UploadForm setLoading={setLoading} loading={loading} />
+          </Route>
+          <Route path="/">
+            <Bookshelf setLoading={setLoading} loading={loading} />
+          </Route>
+          <Route path="/:hash">
+            <BookView setLoading={setLoading} loading={loading} />
+          </Route>
+        </Switch>
+      </BookListContextProvider>
+    </div>
+  );
+};
 
 export default App;

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "SNOWPACK_PUBLIC_API_URL=http://localhost:5000 SNOWPACK_PUBLIC_BASE_URL=http://localhost:8080 snowpack dev",
+    "dev": "SNOWPACK_PUBLIC_API_URL=https://publitebackend.dmitriy.icu SNOWPACK_PUBLIC_BASE_URL=http://localhost:8080 snowpack dev",
     "build": "snowpack build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

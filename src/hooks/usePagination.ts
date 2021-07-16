@@ -25,7 +25,7 @@ export const usePagination = (
   const [pages, setPages] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const computeStartPositionsOfElements = (root: HTMLDivElement) => {
+  const computeStartPositionsOfElements = async (root: HTMLDivElement) => {
     const positionToElement: PositionElement[] = [];
     const idPositions: IdPositions = {};
 
@@ -56,7 +56,7 @@ export const usePagination = (
     setIdPositions(idPositions);
   };
 
-  const findPages = (page: HTMLElement, pageContainer: HTMLElement) => {
+  const findPages = async (page: HTMLElement, pageContainer: HTMLElement) => {
     const pages = [];
     pages.push(0);
     let jump = 100;

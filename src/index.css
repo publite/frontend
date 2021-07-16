@@ -15,7 +15,6 @@ body {
   font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgba(0, 0, 0, 0.05) none repeat scroll 0% 0%;
   color: #000;
 }
 

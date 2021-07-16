@@ -1,0 +1,26 @@
+.container {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  height: 10vh;
+}
+
+.title {
+  font-size: xx-large;
+  text-decoration: none;
+  color: black;
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    height: 15vw;
+  }
+}

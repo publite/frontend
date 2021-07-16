@@ -8,6 +8,7 @@ import { UploadForm } from "~/pages/UploadForm";
 import { Dots } from "~/utils/Dots";
 
 import styles from "./App.module.css";
+import { Navbar } from "./Navbar";
 
 export const App = () => {
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,7 @@ export const App = () => {
           </h1>
         </div>
       )}
+      <Navbar />
       <BookListContextProvider>
         <Switch>
           <Route path="/upload">

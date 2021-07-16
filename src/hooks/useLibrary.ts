@@ -38,9 +38,5 @@ export const useLibrary = (): UseLibraryReturnTuple => {
 
   useEffect(() => updateHashList(hashList), [hashList]);
 
-  useEffect(() => {
-    console.log(library);
-  }, [library]);
-
   return [library, addBook, hashList];
 };

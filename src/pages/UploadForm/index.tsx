@@ -22,8 +22,6 @@ export const UploadForm = () => {
         const res = await submitFile(file);
         setLoading(false);
 
-        console.log(validateResponse(res));
-
         if (validateResponse(res)) {
           saveBook(res);
           setLocation("/");

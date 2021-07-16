@@ -78,8 +78,6 @@ export const usePagination = (
 
     setPages(pages);
     setCurrentPage(0);
-    console.log(pages);
-    console.log("end");
   };
 
   const findPage = (
@@ -208,7 +206,6 @@ export const usePagination = (
   };
 
   const displayPage = (pageNum: number, page: HTMLElement) => {
-    console.log(pageNum, pages.length);
     if (pageNum >= 0 && pageNum < pages.length - 1) {
       setCurrentPage(pageNum);
       const startPosition = pages[pageNum];

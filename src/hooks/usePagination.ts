@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-type TextNode = Text & { nodeValue: string };
-type PositionElement = [number, TextNode];
-type IdPositions = Record<string, number>;
-type UsePaginationReturnTuple = [
-  ready: boolean,
-  goToPage: (pageNum: number) => void,
-  currentPage: number,
-  pageNumber: number
-];
+import {
+  IdPositions,
+  PositionElement,
+  TextNode,
+  UsePaginationReturnTuple,
+} from "~/types/usePagination";
+import { loadPages, savePages } from "~/utils/localStorage";
 
 const isTextNode = (el: Node): el is TextNode => el.nodeType === Node.TEXT_NODE;
 const isElementNode = (el: Node): el is HTMLElement =>
@@ -18,6 +16,7 @@ export const usePagination = (
   contentEl: React.RefObject<HTMLDivElement>,
   pageContainerEl: React.RefObject<HTMLDivElement>,
   pageEl: React.RefObject<HTMLDivElement>,
+  hash?: string,
   bookContent?: string
 ): UsePaginationReturnTuple => {
   const [ready, setReady] = useState(false);
@@ -57,7 +56,11 @@ export const usePagination = (
     setIdPositions(idPositions);
   };
 
-  const findPages = async (page: HTMLElement, pageContainer: HTMLElement) => {
+  const findPages = async (
+    hash: string,
+    page: HTMLElement,
+    pageContainer: HTMLElement
+  ) => {
     const pages = [];
     pages.push(0);
     let jump = 100;
@@ -79,6 +82,7 @@ export const usePagination = (
 
     setPages(pages);
     setCurrentPage(0);
+    savePages(hash, window.innerHeight, window.innerWidth, pages);
   };
 
   const findPage = (
@@ -216,16 +220,17 @@ export const usePagination = (
   };
 
   useEffect(() => {
-    if (contentEl.current && bookContent) {
+    if (contentEl.current && hash && bookContent) {
       contentEl.current.innerHTML = bookContent;
       computeStartPositionsOfElements(contentEl.current);
     }
-  }, [bookContent]);
+  }, [hash, bookContent]);
 
   useEffect(() => {
-    if (positions.length && pageEl.current && pageContainerEl.current)
-      findPages(pageEl.current, pageContainerEl.current);
-  }, [positions, idPositions]);
+    if (hash && positions.length && pageEl.current && pageContainerEl.current)
+      if (!loadPages(hash, window.innerHeight, window.innerWidth, setPages))
+        findPages(hash, pageEl.current, pageContainerEl.current);
+  }, [hash, positions, idPositions]);
 
   useEffect(() => {
     if (pageEl.current && pages.length && !ready)
@@ -235,7 +240,7 @@ export const usePagination = (
   const makeDisplayPage = (page: React.RefObject<HTMLDivElement>) => {
     if (page.current)
       return (pageNum: number) => displayPage(pageNum, page.current!);
-    else return (pageNum: number) => {};
+    else return () => {};
   };
 
   return [ready, makeDisplayPage(pageEl), currentPage, pages.length - 1];

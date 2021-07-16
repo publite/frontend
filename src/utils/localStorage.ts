@@ -29,3 +29,41 @@ export const saveBook = (key: string, book: IBook) =>
 
 export const updateHashList = (hashList: string[]) =>
   localStorage.setItem("list", JSON.stringify(hashList));
+
+const validatePages = (obj: unknown): obj is number[] => {
+  if (obj && Array.isArray(obj)) {
+    for (const el of obj) if (typeof el !== "number") return false;
+    return true;
+  }
+  return false;
+};
+
+export const hashStr = (hash: string, height: number, width: number) =>
+  `pages-${hash}-${height}-${width}`;
+
+export const loadPages = (
+  hash: string,
+  height: number,
+  width: number,
+  cb: (pages: number[]) => void
+) => {
+  const str = localStorage.getItem(hashStr(hash, height, width));
+
+  if (str) {
+    const obj: unknown = JSON.parse(str);
+
+    if (validatePages(obj)) {
+      cb(obj);
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export const savePages = (
+  hash: string,
+  height: number,
+  width: number,
+  pages: number[]
+) => localStorage.setItem(hashStr(hash, height, width), JSON.stringify(pages));

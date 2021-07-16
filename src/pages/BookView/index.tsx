@@ -21,6 +21,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
     contentRef,
     pageContainerRef,
     pageRef,
+    books && loading ? params?.hash : undefined,
     params?.hash && books && loading ? books[params.hash]?.content : undefined
   );
 

@@ -2,19 +2,76 @@
   display: none;
 }
 
+.border {
+  position: fixed;
+  z-index: 2;
+  top: 15vh;
+  height: 100vh;
+  width: 15vh;
+}
+
+.leftBorder {
+  left: 0;
+}
+
+.rightBorder {
+  right: 0;
+}
+
 .pageContainer {
   display: block;
   position: fixed;
-  width: 80vw;
-  left: 10vw;
-  height: 100vh;
-  top: 0;
-  /* overflow: hidden; */
+  width: calc(100vw - 30vh);
+  left: 15vh;
+  top: 15vh;
+  height: 70vh;
   padding: 0;
   margin: 0;
 }
 
 img {
   max-height: 98vh;
-  max-width: 80vw;
+  max-width: 100%;
+}
+
+.pageIndicator {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageSwitchArrow {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 5vh;
+  height: 5vh;
+}
+
+@media screen and (orientation: portrait) {
+  .border {
+    top: 15vw;
+    width: 15vw;
+  }
+
+  .pageContainer {
+    width: 70vw;
+    height: calc(100vh - 30vw);
+    left: 15vw;
+    top: 15vw;
+  }
+
+  .pageIndicator {
+    height: 15vw;
+  }
+
+  .pageSwitchArrow {
+    display: none;
+  }
 }

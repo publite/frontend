@@ -17,7 +17,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
 
-  const [ready, goToPage, currentPage] = usePagination(
+  const [ready, goToPage, currentPage, pagesNumber] = usePagination(
     contentRef,
     pageContainerRef,
     pageRef,
@@ -49,13 +49,35 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
     }
   }, [ready]);
 
+  const goPrev = () => goToPage(currentPage - 1);
+  const goNext = () => goToPage(currentPage + 1);
+
   if (books) {
     if (params?.hash && params.hash in books)
       return (
         <>
+          <div
+            className={`${styles.border} ${styles.leftBorder}`}
+            onClick={goPrev}
+          />
           <div className={styles.content} ref={contentRef} />
           <div className={styles.pageContainer} ref={pageContainerRef}>
-            <div ref={pageRef} />
+            <div ref={pageRef} onClick={goNext} />
+          </div>
+          <div
+            className={`${styles.border} ${styles.rightBorder}`}
+            onClick={goNext}
+          />
+          <div className={styles.pageIndicator}>
+            <button className={styles.pageSwitchArrow} onClick={goPrev}>
+              {currentPage !== 0 && "←"}
+            </button>
+            <span>
+              {currentPage + 1} / {pagesNumber}
+            </span>
+            <button className={styles.pageSwitchArrow} onClick={goNext}>
+              {currentPage !== pagesNumber - 1 && "→"}
+            </button>
           </div>
         </>
       );

@@ -6,7 +6,8 @@ type IdPositions = Record<string, number>;
 type UsePaginationReturnTuple = [
   ready: boolean,
   goToPage: (pageNum: number) => void,
-  currentPage: number
+  currentPage: number,
+  pageNumber: number
 ];
 
 const isTextNode = (el: Node): el is TextNode => el.nodeType === Node.TEXT_NODE;
@@ -237,5 +238,5 @@ export const usePagination = (
     else return (pageNum: number) => {};
   };
 
-  return [ready, makeDisplayPage(pageEl), currentPage];
+  return [ready, makeDisplayPage(pageEl), currentPage, pages.length - 1];
 };

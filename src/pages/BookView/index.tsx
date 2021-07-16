@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Redirect, useRoute } from "wouter";
 
 import styles from "./BookView.module.css";
@@ -21,6 +21,29 @@ export const BookView = () => {
     params?.hash ? books[params.hash]?.content : undefined
   );
 
+  const currentPageRef = useRef(currentPage);
+
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (ready) {
+      const handleKey = ({ key }: KeyboardEvent) => {
+        switch (key) {
+          case "ArrowLeft":
+            goToPage(currentPageRef.current - 1);
+            break;
+          case "ArrowRight":
+            goToPage(currentPageRef.current + 1);
+            break;
+        }
+      };
+
+      window.addEventListener("keydown", handleKey);
+    }
+  }, [ready]);
+
   if (params?.hash && params.hash in books)
     return (
       <>
@@ -30,12 +53,8 @@ export const BookView = () => {
           </div>
         )}
         <div className={styles.content} ref={contentRef} />
-        <div
-          style={{ visibility: "visible", height: "100%" }}
-          className={styles.pageContainer}
-          ref={pageContainerRef}
-        >
-          <div onClick={() => goToPage(currentPage + 1)} ref={pageRef} />
+        <div className={styles.pageContainer} ref={pageContainerRef}>
+          <div ref={pageRef} />
         </div>
       </>
     );

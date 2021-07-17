@@ -29,6 +29,10 @@
   margin: 0;
 }
 
+.page {
+  height: 100%;
+}
+
 img {
   max-height: 90%;
   max-width: 100%;

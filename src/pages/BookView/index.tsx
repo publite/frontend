@@ -63,7 +63,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
           />
           <div className={styles.content} ref={contentRef} />
           <div className={styles.pageContainer} ref={pageContainerRef}>
-            <div ref={pageRef} onClick={goNext} />
+            <div className={styles.page} ref={pageRef} onClick={goNext} />
           </div>
           <div
             className={`${styles.border} ${styles.rightBorder}`}

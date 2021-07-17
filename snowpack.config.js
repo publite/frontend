@@ -12,7 +12,7 @@ module.exports = {
     src: "/dist",
   },
   optimize: {
-    bundle: true,
+    // bundle: true,
   },
   routes: [
     { match: "routes", src: "robots.txt", dest: "/robots.txt" },

@@ -30,7 +30,7 @@ Simple docker deployment
 docker build . -t publite_frontend
 
 # run it with docker
-docker run -p <port>:5000 publite_frontend
+docker run -p <port>:80 publite_frontend
 ```
 
 Dokku deployment with image from Docker Hub

@@ -12,5 +12,5 @@ FROM node:alpine
 RUN npm install serve -g --silent
 WORKDIR /app
 COPY --from=builder /app/build .
-EXPOSE 5002
+EXPOSE 5000
 CMD ["serve", "-p", "5000", "-s", "."]

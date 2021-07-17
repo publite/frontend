@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "wouter";
 
-import plusIcon from "~/assets/plus.svg";
+import PlusIcon from "~/assets/plus.svg";
 import styles from "./AddBook.module.css";
 
 export const AddBook = () => {
@@ -14,7 +14,7 @@ export const AddBook = () => {
       }}
       className={styles.container}
     >
-      <img src={plusIcon} className={styles.plus} />
+      <PlusIcon className={styles.plus} />
       <h1 className={styles.caption}>Add book</h1>
     </button>
   );

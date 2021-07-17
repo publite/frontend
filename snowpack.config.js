@@ -3,7 +3,7 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
-  plugins: ["@snowpack/plugin-typescript"],
+  plugins: ["@snowpack/plugin-typescript", "snowpack-plugin-svgr"],
   packageOptions: {
     polyfillNode: true,
   },

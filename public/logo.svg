@@ -2,8 +2,6 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="372"
-   height="512"
    viewBox="0 0 372 512"
    version="1.1"
    id="svg23656"
@@ -13,45 +11,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview23658"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="true"
-     inkscape:document-units="px"
-     showgrid="false"
-     units="px"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="90.863221"
-     inkscape:cy="228.74904"
-     inkscape:window-width="1916"
-     inkscape:window-height="1048"
-     inkscape:window-x="2"
-     inkscape:window-y="30"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1"
-     inkscape:snap-object-midpoints="true"
-     inkscape:snap-center="true"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:snap-intersection-paths="false"
-     height="372px" />
   <defs
      id="defs23653" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="fill:#feffff;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect9862"
-       width="372"
-       height="512"
-       x="0"
-       y="0" />
     <g
        id="g9760">
       <path

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "wouter";
 
-import plusIcon from "~/assets/plus.svg";
+import PlusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "~/utils/api";
 import { BookListContext } from "~/context";
@@ -51,7 +51,7 @@ export const UploadForm = ({ setLoading }: IPageProps) => {
       onDragOver={handleDragOver}
     >
       <label className={styles.label} htmlFor="file">
-        <img className={styles.plus} src={plusIcon} />
+        <PlusIcon className={styles.plus} />
         <span>
           Choose book file or drag and drop it
           <br />

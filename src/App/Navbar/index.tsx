@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Navbar.module.css";
-import logoIcon from "~/assets/logo.svg";
+import LogoIcon from "~/assets/logo.svg";
 import { useLocation, Link } from "wouter";
 
 export const Navbar = () => {
@@ -15,12 +15,7 @@ export const Navbar = () => {
       <Link href="/">
         {path === "/" ? (
           <a>
-            <img
-              className={styles.logo}
-              src={logoIcon}
-              alt="Publite logotype"
-              title="Publite"
-            />
+            <LogoIcon className={styles.logo} />
           </a>
         ) : (
           <a className={styles.title}>Publite</a>

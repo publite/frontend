@@ -22,3 +22,26 @@ npm run dev
 npm run build
 npm exec serve -s build
 ```
+
+Simple docker deployment
+
+```bash
+# build docker image
+docker build . -t publite_frontend
+
+# run it with docker
+docker run -p <port>:5000 publite_frontend
+```
+
+Dokku deployment with image from Docker Hub
+
+```bash
+dokku apps:create publitefrontend
+
+dokku git:from-image publitefrontend publite/frontend:latest
+```
+
+# TODO
+
+- Optimize page spliting algorythm (rewrite it)
+- Fix css modules bundling

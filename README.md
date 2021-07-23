@@ -43,5 +43,8 @@ dokku git:from-image publitefrontend publite/frontend:latest
 
 # TODO
 
+- Add page position persistance
+- Add menu with book view setting
+- Add move to page by number
 - Optimize page spliting algorythm (rewrite it)
 - Fix css modules bundling

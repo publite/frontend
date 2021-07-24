@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { MouseEventHandler, useContext, useEffect, useRef } from "react";
 import { Redirect, useRoute } from "wouter";
 
 import styles from "./BookView.module.css";
@@ -60,6 +60,13 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
 
   const goPrev = () => goToPage(currentPage - 1);
   const goNext = () => goToPage(currentPage + 1);
+  const insertNumber: MouseEventHandler<HTMLSpanElement> = (e) => {
+    const str = prompt("Page number");
+    if (str) {
+      const n = parseInt(str);
+      if (!isNaN(n) && n > 0) goToPage(n - 1);
+    }
+  };
 
   if (books) {
     if (params?.hash && params.hash in books)
@@ -81,7 +88,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
             <button className={styles.pageSwitchArrow} onClick={goPrev}>
               {currentPage !== 0 && "←"}
             </button>
-            <span>
+            <span className={styles.pageNumber} onClick={insertNumber}>
               {currentPage + 1} / {pagesNumber}
             </span>
             <button className={styles.pageSwitchArrow} onClick={goNext}>

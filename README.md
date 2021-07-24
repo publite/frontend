@@ -30,7 +30,7 @@ Simple docker deployment
 docker build . -t publite_frontend
 
 # run it with docker
-docker run -p <port>:5000 publite_frontend
+docker run -p <port>:80 publite_frontend
 ```
 
 Dokku deployment with image from Docker Hub
@@ -43,5 +43,8 @@ dokku git:from-image publitefrontend publite/frontend:latest
 
 # TODO
 
+- Add page position persistance
+- Add menu with book view setting
+- Add move to page by number
 - Optimize page spliting algorythm (rewrite it)
 - Fix css modules bundling

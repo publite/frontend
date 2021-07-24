@@ -43,6 +43,8 @@ dokku git:from-image publitefrontend publite/frontend:latest
 
 # TODO
 
+- Create ServiceWorker (make it PWA)
+- Migrate from LocalStorage to IndexedDB
 - Add page position persistance
 - Add menu with book view setting
 - Add move to page by number

@@ -1,10 +1,10 @@
 import React from "react";
 import { useLibrary, UseLibraryReturnTuple } from "./hooks/useLibrary";
-import { IBook } from "./types/book";
+import { BookT } from "./types/book";
 
 export const BookListContext = React.createContext<UseLibraryReturnTuple>([
   {},
-  (book: IBook) => {},
+  (book: BookT) => {},
   [],
 ]);
 

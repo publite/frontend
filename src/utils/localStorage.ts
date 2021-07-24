@@ -1,4 +1,4 @@
-import { IBook } from "~/types/book";
+import { BookState, BookT } from "~/types/book";
 import { isArrOfStr } from "~/types/utils";
 import { validateResponse } from "~/utils/api";
 
@@ -17,7 +17,7 @@ export const getHashList = () => {
 };
 
 export const getBookHT = (hashList: string[]) => {
-  const bookHT: Record<string, IBook> = {};
+  const bookHT: Record<string, BookT> = {};
 
   hashList.forEach((hash) => {
     try {
@@ -31,7 +31,7 @@ export const getBookHT = (hashList: string[]) => {
   return bookHT;
 };
 
-export const saveBook = (key: string, book: IBook) =>
+export const saveBook = (key: string, book: BookT) =>
   localStorage.setItem(key, JSON.stringify(book));
 
 export const updateHashList = (hashList: string[]) =>
@@ -78,3 +78,37 @@ export const savePages = (
   width: number,
   pages: number[]
 ) => localStorage.setItem(hashStr(hash, height, width), JSON.stringify(pages));
+
+export const validateBookState = (obj: unknown): obj is BookState =>
+  Boolean(
+    obj &&
+      typeof obj === "object" &&
+      !Array.isArray(obj) &&
+      "currentPage" in obj
+  );
+
+export const loadBookState = (
+  hash: string,
+  cb: (bookState: BookState) => void,
+  ecb: () => void
+) => {
+  const str = localStorage.getItem(hash + "-state");
+
+  if (str) {
+    try {
+      const obj: unknown = JSON.parse(str);
+
+      if (validateBookState(obj)) {
+        cb(obj);
+        return true;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  ecb();
+};
+
+export const saveBookState = (hash: string, state: BookState) =>
+  localStorage.setItem(hash + "-state", JSON.stringify(state));

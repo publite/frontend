@@ -1,4 +1,4 @@
-import { IBook, requiredBookProps } from "~/types/book";
+import { BookT, requiredBookProps } from "~/types/book";
 
 import { API_URL } from "~/constants";
 
@@ -39,7 +39,7 @@ export const submitFile = async (
   }
 };
 
-export const validateResponse = (content: unknown): content is IBook => {
+export const validateResponse = (content: unknown): content is BookT => {
   if (content && typeof content === "object")
     for (const key of requiredBookProps)
       if (!(key in content)) {

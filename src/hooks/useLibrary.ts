@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IBook } from "~/types/book";
+import { BookT } from "~/types/book";
 import {
   getBookHT,
   getHashList,
@@ -7,16 +7,16 @@ import {
   updateHashList,
 } from "~/utils/localStorage";
 
-export type AddBookFT = (book: IBook) => void;
+export type AddBookFT = (book: BookT) => void;
 
 export type UseLibraryReturnTuple = [
-  Record<string, IBook> | null,
+  Record<string, BookT> | null,
   AddBookFT,
   string[]
 ];
 
 export const useLibrary = (): UseLibraryReturnTuple => {
-  const [library, setLibrary] = useState<Record<string, IBook> | null>(null);
+  const [library, setLibrary] = useState<Record<string, BookT> | null>(null);
   const [hashList, setHashList] = useState<string[]>([]);
 
   const addBook: AddBookFT = (book) => {

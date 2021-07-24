@@ -6,6 +6,7 @@ import styles from "./BookView.module.css";
 import { BookListContext } from "~/context";
 import { usePagination } from "~/hooks/usePagination";
 import { IPageProps } from "~/types/page";
+import { useBookState } from "~/hooks/useBookState";
 
 export const BookView = ({ setLoading, loading }: IPageProps) => {
   useEffect(() => setLoading(true), []);
@@ -17,7 +18,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
 
-  const [ready, goToPage, currentPage, pagesNumber] = usePagination(
+  const [pagesReady, goToPage, currentPage, pagesNumber] = usePagination(
     contentRef,
     pageContainerRef,
     pageRef,
@@ -31,8 +32,15 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
     currentPageRef.current = currentPage;
   }, [currentPage]);
 
+  const [bookStateReady, bs] = useBookState(
+    pagesReady,
+    params?.hash,
+    goToPage,
+    currentPageRef
+  );
+
   useEffect(() => {
-    if (ready) {
+    if (bookStateReady) {
       setLoading(false);
 
       const handleKey = ({ key }: KeyboardEvent) => {
@@ -48,7 +56,7 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
 
       window.addEventListener("keydown", handleKey);
     }
-  }, [ready]);
+  }, [bookStateReady]);
 
   const goPrev = () => goToPage(currentPage - 1);
   const goNext = () => goToPage(currentPage + 1);

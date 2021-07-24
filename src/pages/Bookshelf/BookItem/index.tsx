@@ -2,10 +2,10 @@ import React from "react";
 
 import styles from "./BookItem.module.css";
 
-import { IBook } from "~/types/book";
+import { BookT } from "~/types/book";
 import { Link } from "wouter";
 
-interface IBookItemProps extends IBook {}
+interface IBookItemProps extends BookT {}
 
 export const BookItem = ({ author, title, cover, hash }: IBookItemProps) => {
   return (

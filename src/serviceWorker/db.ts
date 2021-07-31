@@ -23,3 +23,9 @@ export const saveBook = async (book: BookT) =>
  * Returns all books saved in IndexedDB
  */
 export const getBooks = async () => (await openDB()).getAll("Books");
+
+/**
+ * Gets book from IndexedDB by hash
+ */
+export const getBook = async (hash: string) =>
+  (await openDB()).get("Books", hash);

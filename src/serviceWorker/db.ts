@@ -1,4 +1,5 @@
 import * as idb from "idb";
+import { BookT } from "~/types/book";
 import { DB_NAME, DB_VERSION } from "../constants";
 import { PubliteDB } from "./schema";
 
@@ -11,3 +12,9 @@ export const openDB = () =>
       if (oldVersion < 1) db.createObjectStore("Books", { keyPath: "hash" });
     },
   });
+
+/**
+ * Saves IBook object in IndexedDB
+ */
+export const saveBook = async (book: BookT) =>
+  (await openDB()).add("Books", book);

@@ -1,4 +1,5 @@
 import { precache } from "./cache";
+import { openDB as createDB } from "./db";
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -7,4 +8,4 @@ self.addEventListener("install", (event) => {
   event.waitUntil(precache());
 });
 
-export type {};
+self.addEventListener("activate", (event) => event.waitUntil(createDB()));

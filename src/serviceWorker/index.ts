@@ -1,6 +1,11 @@
 import { fromCache, precache } from "./cache";
 import { openDB as createDB } from "./db";
-import { handle, handleBookUpload, PathHandler } from "./fetchHandlers";
+import {
+  handle,
+  handleBooks,
+  handleBookUpload,
+  PathHandler,
+} from "./fetchHandlers";
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -17,6 +22,7 @@ self.addEventListener("fetch", (event) => {
 
   const handlers: PathHandler[] = [
     { path: "/upload", getResponse: () => handleBookUpload(request) },
+    { path: "/list", getResponse: () => handleBooks() },
     { path: "", getResponse: () => fromCache(request) },
   ];
 

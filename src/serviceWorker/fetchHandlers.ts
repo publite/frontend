@@ -1,4 +1,4 @@
-import { saveBook } from "./db";
+import { getBooks, saveBook } from "./db";
 
 export interface PathHandler {
   /** Path start for handler */
@@ -33,4 +33,13 @@ export const handleBookUpload = async (request: Request) => {
   } catch (err) {
     return new Response(JSON.stringify(err));
   }
+};
+
+/**
+ * Gets all books from database
+ */
+export const handleBooks = async () => {
+  const list = await getBooks();
+
+  return new Response(JSON.stringify(list));
 };

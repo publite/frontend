@@ -18,3 +18,8 @@ export const openDB = () =>
  */
 export const saveBook = async (book: BookT) =>
   (await openDB()).add("Books", book);
+
+/**
+ * Returns all books saved in IndexedDB
+ */
+export const getBooks = async () => (await openDB()).getAll("Books");

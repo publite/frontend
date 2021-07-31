@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
+    "isolatedModules": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "lib": ["DOM"],
+    "lib": ["DOM", "webworker"],
     "module": "ES2020",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es6"
   }
 }

@@ -43,7 +43,7 @@ export const validateResponse = (content: unknown): content is BookT => {
   if (content && typeof content === "object")
     for (const key of requiredBookProps)
       if (!(key in content)) {
-        if (import.meta.env.NODE_ENV === "development")
+        if (process.env.NODE_ENV === "development")
           console.log(`${key} is not specified in server response`);
         return false;
       }

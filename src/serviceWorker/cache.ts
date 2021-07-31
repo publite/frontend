@@ -11,12 +11,13 @@ export const precache = async () =>
 /**
  * Requests file from network or gets it from cache if offline
  */
-export const fromCache = async (request: Request) => {
+export const fromCache = async (request: Request): Promise<Response> => {
   try {
     const response = await fetch(request);
-    (await getCache()).put(request, response);
+    (await getCache()).put(request, response.clone());
     return response;
   } catch (err) {
-    return (await getCache()).match(request);
+    const response = await (await getCache()).match(request);
+    return response || new Response();
   }
 };

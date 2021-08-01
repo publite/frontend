@@ -1,16 +1,29 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Bookshelf.module.css";
 
 import { BookItem } from "./BookItem";
 import { AddBook } from "./AddBook";
-import { BookListContext } from "~/context";
 import { IPageProps } from "~/types/page";
+import { API_URL } from "~/constants";
+import { BookT } from "~/types/book";
+import { connected as swConnected } from "~/utils/serviceFetch";
 
 export const Bookshelf = ({ setLoading }: IPageProps) => {
   useEffect(() => setLoading(true), []);
 
-  const [books] = useContext(BookListContext);
+  const [books, setBooks] = useState<BookT[]>([]);
+
+  useEffect(() => {
+    swConnected.then(async () => {
+      try {
+        const res = await fetch(API_URL + "/list");
+        setBooks(await res.json());
+      } catch (err) {
+        if (process.env.NODE_ENV === "development") console.error(err);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     if (books) setLoading(false);

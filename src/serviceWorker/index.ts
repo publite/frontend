@@ -26,6 +26,7 @@ self.addEventListener("fetch", (event) => {
   let handlers: PathHandler[];
 
   if (request.url.startsWith(API_URL)) {
+    console.log("API: ", path);
     handlers = [
       { path: "/list", getResponse: () => handleBooks() },
       { path: "/book/", getResponse: () => handleBook(request, getHash(path)) },

@@ -42,7 +42,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.PUBLIC_API_URL": JSON.stringify(
-        "https://publitebackend.dmitriy.icu"
+        "http://localhost:8081"
       ),
     }),
     new ForkTsCheckerPlugin(),

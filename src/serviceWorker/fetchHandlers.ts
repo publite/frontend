@@ -28,7 +28,7 @@ export const handleBookUpload = async (request: Request) => {
     if (res.ok) {
       const book = await res.json();
       await saveBook(book);
-      return new Response(book);
+      return new Response(JSON.stringify(book));
     } else throw new Error(res.status.toString() + res.statusText);
   } catch (err) {
     return new Response(JSON.stringify(err));

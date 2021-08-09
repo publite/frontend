@@ -46,4 +46,3 @@ dokku git:from-image publitefrontend publite/frontend:latest
 - Migrate pagination cache and book state from LocalStorage to IndexedDB
 - Add menu with book view setting
 - Optimize page spliting algorythm (rewrite it)
-- Add app manifest

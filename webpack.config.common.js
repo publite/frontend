@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 
 const CopyPlugin = require("copy-webpack-plugin");
 const ForkTsCheckerPlugin = require("fork-ts-checker-webpack-plugin");
@@ -40,11 +39,6 @@ module.exports = {
     alias: { "~": path.resolve(__dirname, "src/") },
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env.PUBLIC_API_URL": JSON.stringify(
-        "http://localhost:8081"
-      ),
-    }),
     new ForkTsCheckerPlugin(),
     new CopyPlugin({
       patterns: [{ from: "./public", to: "." }],

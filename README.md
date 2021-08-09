@@ -41,7 +41,7 @@ dokku apps:create publitefrontend
 dokku git:from-image publitefrontend publite/frontend:latest
 ```
 
-# TODO
+## TODO
 
 - Migrate pagination cache and book state from LocalStorage to IndexedDB
 - Add menu with book view setting

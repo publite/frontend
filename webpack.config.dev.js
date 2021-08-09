@@ -21,6 +21,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("development"),
       "process.env.PUBLIC_BASE_URL": JSON.stringify("http://localhost:8080"),
+      "process.env.PUBLIC_API_URL": JSON.stringify("http://localhost:8081"),
     }),
     ...webpackConfig.plugins,
   ],

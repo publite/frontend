@@ -15,6 +15,9 @@ module.exports = {
       "process.env.PUBLIC_BASE_URL": JSON.stringify(
         "https://publite.dmitriy.icu"
       ),
+      "process.env.PUBLIC_API_URL": JSON.stringify(
+        "https://publitebackend.dmitriy.icu"
+      ),
     }),
     ...webpackConfig.plugins,
   ],

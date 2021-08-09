@@ -6,7 +6,13 @@ const getCache = () => caches.open(CACHE);
  * Caches static files for application
  */
 export const precache = async () =>
-  (await getCache()).addAll(["/", "/index.js", "/sw.js"]);
+  (await getCache()).addAll([
+    "/",
+    "/index.js",
+    "/sw.js",
+    "/manifest.json",
+    "/favicon.ico",
+  ]);
 
 /**
  * Requests file from network or gets it from cache if offline

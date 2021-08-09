@@ -21,11 +21,8 @@ export const useBookState = (
   }, [hash]);
 
   useEffect(() => {
-    console.log(Boolean(!ready && state?.currentPage && goToPage));
     if (!ready && state?.currentPage && pagesReady) {
-      console.log("Go to", state.currentPage);
       goToPage(state.currentPage);
-      console.log("Ready");
       setReady(true);
     } else if (hash && !ready && pagesReady && typeof state === "object") {
       saveBookState(hash, { currentPage: 0 });
@@ -36,7 +33,6 @@ export const useBookState = (
   useEffect(
     () => () => {
       if (hash) {
-        console.log(currentPage);
         if (ready && state) saveBookState(hash, state);
         else saveBookState(hash, { currentPage: currentPage.current || 0 });
       }

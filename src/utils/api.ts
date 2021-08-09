@@ -34,7 +34,7 @@ export const submitFile = async (
 
     return await res.json();
   } catch (err) {
-    console.log("Network error:", err.message);
+    console.error("Network error:", err.message);
     throw err;
   }
 };
@@ -44,7 +44,7 @@ export const validateResponse = (content: unknown): content is BookT => {
     for (const key of requiredBookProps)
       if (!(key in content)) {
         if (process.env.NODE_ENV === "development")
-          console.log(`${key} is not specified in server response`);
+          console.error(`${key} is not specified in server response`);
         return false;
       }
 

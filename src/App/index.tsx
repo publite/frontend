@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Route, Switch } from "wouter";
-import { BookListContextProvider } from "~/context";
 
 import { Bookshelf } from "~/pages/Bookshelf";
 import { BookView } from "~/pages/BookView";
@@ -24,19 +23,17 @@ export const App = () => {
         </div>
       )}
       <Navbar />
-      <BookListContextProvider>
-        <Switch>
-          <Route path="/upload">
-            <UploadForm setLoading={setLoading} loading={loading} />
-          </Route>
-          <Route path="/">
-            <Bookshelf setLoading={setLoading} loading={loading} />
-          </Route>
-          <Route path="/:hash">
-            <BookView setLoading={setLoading} loading={loading} />
-          </Route>
-        </Switch>
-      </BookListContextProvider>
+      <Switch>
+        <Route path="/upload">
+          <UploadForm setLoading={setLoading} loading={loading} />
+        </Route>
+        <Route path="/">
+          <Bookshelf setLoading={setLoading} loading={loading} />
+        </Route>
+        <Route path="/:hash">
+          <BookView setLoading={setLoading} loading={loading} />
+        </Route>
+      </Switch>
     </div>
   );
 };

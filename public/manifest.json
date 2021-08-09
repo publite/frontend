@@ -1,0 +1,47 @@
+{
+  "short_name": "Publite",
+  "name": "Publite: eBook reader",
+  "icons": [
+    {
+      "src": "images/icons-128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000",
+  "description": "eBook reader supporting EPUB and FB2 files",
+  "screenshots": [
+    {
+      "src": "/images/screenshot1.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    },
+    {
+      "src": "/images/screenshot2.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    },
+    {
+      "src": "/images/screenshot3.jpg",
+      "type": "image/jpg",
+      "sizes": "1080x2400"
+    }
+  ]
+}

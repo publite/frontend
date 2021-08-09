@@ -45,7 +45,7 @@ export const validateResponse = (content: unknown): content is BookT => {
       if (!(key in content)) {
         if (process.env.NODE_ENV === "development")
           console.error(`${key} is not specified in server response`);
-        return false;
+        throw new Error(`${key} is not specified in server response`);
       }
 
   return true;

@@ -1,4 +1,5 @@
 import { getBook, getBooks, saveBook } from "./db";
+import { composeResponseStatus } from "./utils";
 
 export interface PathHandler {
   /** Path start for handler */
@@ -31,7 +32,7 @@ export const handleBookUpload = async (request: Request) => {
       return new Response(JSON.stringify(book));
     } else throw new Error(res.status.toString() + res.statusText);
   } catch (err) {
-    return new Response(JSON.stringify(err));
+    return new Response(JSON.stringify(err), composeResponseStatus(err));
   }
 };
 
@@ -51,5 +52,8 @@ export const handleBook = async (request: Request, hash: string) => {
   const book = await getBook(hash);
   if (book) return new Response(JSON.stringify(book));
 
-  return new Response("No such book :(");
+  return new Response(null, {
+    status: 404,
+    statusText: "No such book :(",
+  });
 };

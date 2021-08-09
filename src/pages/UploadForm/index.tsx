@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "wouter";
 
 import PlusIcon from "~/assets/plus.svg";
 import styles from "./UploadForm.module.css";
 import { submitFile, validateResponse, validState } from "~/utils/api";
-import { BookListContext } from "~/context";
 import { IPageProps } from "~/types/page";
 
 export const UploadForm = ({ setLoading }: IPageProps) => {
   const [error, setError] = useState("");
   const [_, setLocation] = useLocation();
-
-  const [__, saveBook] = useContext(BookListContext);
 
   const processFile = async (file: File | undefined) => {
     try {
@@ -22,10 +19,7 @@ export const UploadForm = ({ setLoading }: IPageProps) => {
         const res = await submitFile(file);
         setLoading(false);
 
-        if (validateResponse(res)) {
-          saveBook(res);
-          setLocation("/");
-        }
+        if (validateResponse(res)) setLocation("/");
       }
     } catch (err) {
       setLoading(false);

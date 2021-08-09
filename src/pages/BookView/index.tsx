@@ -1,29 +1,52 @@
-import React, { MouseEventHandler, useContext, useEffect, useRef } from "react";
+import React, { MouseEventHandler, useState, useEffect, useRef } from "react";
 import { Redirect, useRoute } from "wouter";
 
 import styles from "./BookView.module.css";
 
-import { BookListContext } from "~/context";
 import { usePagination } from "~/hooks/usePagination";
 import { IPageProps } from "~/types/page";
 import { useBookState } from "~/hooks/useBookState";
+import { BookT } from "~/types/book";
+import { API_URL } from "~/constants";
+import { validateResponse } from "~/utils/api";
 
 export const BookView = ({ setLoading, loading }: IPageProps) => {
   useEffect(() => setLoading(true), []);
 
+  const [hasErr, setHasErr] = useState(false);
+  const [book, setBook] = useState<BookT>();
+
   const [_, params] = useRoute("/:hash");
-  const [books] = useContext(BookListContext);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const pageContainerRef = useRef<HTMLDivElement>(null);
   const pageRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (params?.hash) {
+      (async () => {
+        try {
+          const res = await fetch(API_URL + "/book/" + params.hash);
+          if (!res.ok) throw new Error(res.status + " " + res.statusText);
+
+          const book: unknown = await res.json();
+
+          if (validateResponse(book)) setBook(book);
+        } catch (err) {
+          if (process.env.NODE_ENV === "development") console.error(err);
+          setHasErr(true);
+          setLoading(false);
+        }
+      })();
+    }
+  }, []);
+
   const [pagesReady, goToPage, currentPage, pagesNumber] = usePagination(
     contentRef,
     pageContainerRef,
     pageRef,
-    books && loading ? params?.hash : undefined,
-    params?.hash && books && loading ? books[params.hash]?.content : undefined
+    book ? params?.hash : undefined,
+    params?.hash ? book?.content : undefined
   );
 
   const currentPageRef = useRef(currentPage);
@@ -68,35 +91,33 @@ export const BookView = ({ setLoading, loading }: IPageProps) => {
     }
   };
 
-  if (books) {
-    if (params?.hash && params.hash in books)
-      return (
-        <>
-          <div
-            className={`${styles.border} ${styles.leftBorder}`}
-            onClick={goPrev}
-          />
-          <div className={styles.content} ref={contentRef} />
-          <div className={styles.pageContainer} ref={pageContainerRef}>
-            <div className={styles.page} ref={pageRef} onClick={goNext} />
-          </div>
-          <div
-            className={`${styles.border} ${styles.rightBorder}`}
-            onClick={goNext}
-          />
-          <div className={styles.pageIndicator}>
-            <button className={styles.pageSwitchArrow} onClick={goPrev}>
-              {currentPage !== 0 && "←"}
-            </button>
-            <span className={styles.pageNumber} onClick={insertNumber}>
-              {currentPage + 1} / {pagesNumber}
-            </span>
-            <button className={styles.pageSwitchArrow} onClick={goNext}>
-              {currentPage !== pagesNumber - 1 && "→"}
-            </button>
-          </div>
-        </>
-      );
-    return <Redirect to="/" />;
-  } else return <></>;
+  if (hasErr) return <Redirect to="/" />;
+
+  return (
+    <>
+      <div
+        className={`${styles.border} ${styles.leftBorder}`}
+        onClick={goPrev}
+      />
+      <div className={styles.content} ref={contentRef} />
+      <div className={styles.pageContainer} ref={pageContainerRef}>
+        <div className={styles.page} ref={pageRef} onClick={goNext} />
+      </div>
+      <div
+        className={`${styles.border} ${styles.rightBorder}`}
+        onClick={goNext}
+      />
+      <div className={styles.pageIndicator}>
+        <button className={styles.pageSwitchArrow} onClick={goPrev}>
+          {currentPage !== 0 && "←"}
+        </button>
+        <span className={styles.pageNumber} onClick={insertNumber}>
+          {currentPage + 1} / {pagesNumber}
+        </span>
+        <button className={styles.pageSwitchArrow} onClick={goNext}>
+          {currentPage !== pagesNumber - 1 && "→"}
+        </button>
+      </div>
+    </>
+  );
 };
